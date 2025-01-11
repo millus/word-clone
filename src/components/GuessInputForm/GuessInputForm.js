@@ -1,13 +1,12 @@
 import React from "react";
 
-function GuessInputForm() {
-  const [guess, setGuess] = React.useState("");
-
+function GuessInputForm({ guess, setGuess, setGuessList, guessList }) {
   function handleGuess(event) {
     event.preventDefault();
     if (guess.length == 5) {
       console.log({ guess });
-      setGuess('');
+      setGuessList([...guessList, guess]);
+      setGuess("");
     } else window.alert("Word must me minimum 5 letters");
   }
 
@@ -21,7 +20,9 @@ function GuessInputForm() {
         id="guess-input"
         type="text"
         value={guess}
-        onChange={(event) => setGuess(event.target.value.toUpperCase())}
+        onChange={(event) => {
+          setGuess(event.target.value.toUpperCase());
+        }}
       ></input>
     </form>
   );
