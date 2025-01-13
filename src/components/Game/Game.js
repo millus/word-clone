@@ -1,5 +1,5 @@
 import React from "react";
-
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants.js";
 import { sample } from "../../utils";
 import { WORDS } from "../../data";
 import GuessInputForm from "../GuessInputForm";
@@ -11,18 +11,15 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
-  const [guess, setGuess] = React.useState("");
-  const [guessList, setGuessList] = React.useState([]);
+  const [guesses, setGuesses] = React.useState([]);
 
+  function handleSubmitGuess(tentativeGuess) {
+    setGuesses([...guesses, tentativeGuess]);
+  }
   return (
     <>
-      <GuessInputForm
-        guess={guess}
-        setGuess={setGuess}
-        setGuessList={setGuessList}
-        guessList={guessList}
-      ></GuessInputForm>
-      <GuessResults guessList={guessList}></GuessResults>;
+      <GuessResults guesses={guesses}></GuessResults>
+      <GuessInputForm handleSubmitGuess={handleSubmitGuess} />
     </>
   );
 }

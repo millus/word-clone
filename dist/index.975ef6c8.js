@@ -18647,6 +18647,7 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _constantsJs = require("../../constants.js");
 var _utils = require("../../utils");
 var _data = require("../../data");
 var _guessInputForm = require("../GuessInputForm");
@@ -18662,32 +18663,33 @@ console.info({
 });
 function Game() {
     _s();
-    const [guess, setGuess] = (0, _reactDefault.default).useState("");
-    const [guessList, setGuessList] = (0, _reactDefault.default).useState([]);
+    const [guesses, setGuesses] = (0, _reactDefault.default).useState([]);
+    function handleSubmitGuess(tentativeGuess) {
+        setGuesses([
+            ...guesses,
+            tentativeGuess
+        ]);
+    }
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _guessInputFormDefault.default), {
-                guess: guess,
-                setGuess: setGuess,
-                setGuessList: setGuessList,
-                guessList: guessList
-            }, void 0, false, {
-                fileName: "src/components/Game/Game.js",
-                lineNumber: 19,
-                columnNumber: 7
-            }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _guessResultsDefault.default), {
-                guessList: guessList
+                guesses: guesses
             }, void 0, false, {
                 fileName: "src/components/Game/Game.js",
-                lineNumber: 25,
+                lineNumber: 21,
                 columnNumber: 7
             }, this),
-            ";"
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _guessInputFormDefault.default), {
+                handleSubmitGuess: handleSubmitGuess
+            }, void 0, false, {
+                fileName: "src/components/Game/Game.js",
+                lineNumber: 22,
+                columnNumber: 7
+            }, this)
         ]
     }, void 0, true);
 }
-_s(Game, "kMEjDrb2N8xmYyceLTIUGc8EVCQ=");
+_s(Game, "o1oJThhKU1yQYkTwv9Oq4sjxIZ4=");
 _c = Game;
 exports.default = Game;
 var _c;
@@ -18698,7 +18700,7 @@ $RefreshReg$(_c, "Game");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../utils":"en4he","../../data":"9kapS","../GuessInputForm":"9dQVh","../GuessResults/GuessResults":"12vl0","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"en4he":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../utils":"en4he","../../data":"9kapS","../GuessInputForm":"9dQVh","../GuessResults/GuessResults":"12vl0","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../constants.js":"3huJa"}],"en4he":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "sample", ()=>sample);
@@ -18823,51 +18825,52 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-function GuessInputForm({ guess, setGuess, setGuessList, guessList }) {
+var _s = $RefreshSig$();
+function GuessInputForm({ handleSubmitGuess }) {
+    _s();
+    const [tentativeGuess, setTentativeGuess] = (0, _reactDefault.default).useState("");
     function handleGuess(event) {
         event.preventDefault();
-        if (guess.length == 5) {
-            console.log({
-                guess
-            });
-            setGuessList([
-                ...guessList,
-                guess
-            ]);
-            setGuess("");
-        } else window.alert("Word must me minimum 5 letters");
+        handleSubmitGuess(tentativeGuess);
+        setTentativeGuess("");
     }
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
         className: "guess-input-wrapper",
-        onSubmit: (event)=>handleGuess(event),
+        onSubmit: handleGuess,
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                 htmlFor: "guess-input",
                 children: "Enter guess:"
             }, void 0, false, {
                 fileName: "src/components/GuessInputForm/GuessInputForm.js",
-                lineNumber: 18,
+                lineNumber: 16,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                 id: "guess-input",
                 type: "text",
-                value: guess,
+                value: tentativeGuess,
                 onChange: (event)=>{
-                    setGuess(event.target.value.toUpperCase());
-                }
+                    setTentativeGuess(event.target.value.toUpperCase());
+                },
+                maxLength: 5,
+                minLength: 5,
+                pattern: "[a-zA-Z]{5}",
+                title: "5 letter word",
+                required: true
             }, void 0, false, {
                 fileName: "src/components/GuessInputForm/GuessInputForm.js",
-                lineNumber: 19,
+                lineNumber: 17,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/GuessInputForm/GuessInputForm.js",
-        lineNumber: 14,
+        lineNumber: 15,
         columnNumber: 5
     }, this);
 }
+_s(GuessInputForm, "+Ui01OZIiKy3oUY9CwelLJi1aCw=");
 _c = GuessInputForm;
 exports.default = GuessInputForm;
 var _c;
@@ -19028,20 +19031,23 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-function GuessResults({ guessList }) {
+var _guess = require("../Guess/Guess");
+var _guessDefault = parcelHelpers.interopDefault(_guess);
+var _constants = require("../../constants");
+var _utils = require("../../utils");
+function GuessResults({ guesses }) {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        class: "guess-results",
-        children: guessList.map((item, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                className: "guess",
-                children: item
-            }, index, false, {
+        className: "guess-results",
+        children: (0, _utils.range)((0, _constants.NUM_OF_GUESSES_ALLOWED)).map((num)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _guessDefault.default), {
+                value: guesses[num]
+            }, num, false, {
                 fileName: "src/components/GuessResults/GuessResults.js",
-                lineNumber: 7,
+                lineNumber: 11,
                 columnNumber: 9
             }, this))
     }, void 0, false, {
         fileName: "src/components/GuessResults/GuessResults.js",
-        lineNumber: 5,
+        lineNumber: 9,
         columnNumber: 5
     }, this);
 }
@@ -19055,7 +19061,53 @@ $RefreshReg$(_c, "GuessResults");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cxSZo":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../Guess/Guess":"u6UxK","../../constants":"3huJa","../../utils":"en4he"}],"u6UxK":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$424d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$424d.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _utils = require("../../utils");
+function Guess({ value }) {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+        className: "guess",
+        children: (0, _utils.range)(5).map((num)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                className: "cell",
+                children: value ? value[num] : undefined
+            }, num, false, {
+                fileName: "src/components/Guess/Guess.js",
+                lineNumber: 9,
+                columnNumber: 9
+            }, this))
+    }, void 0, false, {
+        fileName: "src/components/Guess/Guess.js",
+        lineNumber: 7,
+        columnNumber: 5
+    }, this);
+}
+_c = Guess;
+exports.default = Guess;
+var _c;
+$RefreshReg$(_c, "Guess");
+
+  $parcel$ReactRefreshHelpers$424d.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../utils":"en4he"}],"3huJa":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "NUM_OF_GUESSES_ALLOWED", ()=>NUM_OF_GUESSES_ALLOWED);
+const NUM_OF_GUESSES_ALLOWED = 6;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cxSZo":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _headerDefault.default));
